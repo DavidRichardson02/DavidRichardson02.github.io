@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>David Richardson | Portfolio</title>
+  <title>David Richardson | Computer Engineering Résumé</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Portfolio of David Richardson — Computer Engineering student focusing on FPGA design, embedded systems, and high-performance C++ simulation." />
+  <meta
+    name="description"
+    content="Résumé and portfolio of David Richardson — Computer Engineering student focusing on FPGA design, embedded systems, numerical simulation, and high-performance C++ development."
+  />
 
+  <!-- Your dark theme stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Font Awesome for icons -->
+  <!-- Icons (Font Awesome) -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -23,15 +27,15 @@
     <div class="container nav-container">
       <div class="brand">
         <span class="brand-name">David Richardson</span>
-        <span class="brand-tagline">Computer Engineering • FPGA • Embedded • C++</span>
+        <span class="brand-tagline">Computer Engineering • FPGA • Embedded • C/C++</span>
       </div>
       <nav class="main-nav">
-        <a href="index.html#home">Home</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#skills">Skills</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="projects.html">Deep Dives</a>
-        <a href="index.html#contact">Contact</a>
+        <a href="#home">Home</a>
+        <a href="#about">Profile</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -42,26 +46,29 @@
       <div class="hero-text">
         <h1>Hi, I'm <span class="accent">David Richardson</span>.</h1>
         <p class="hero-lead">
-          I design and implement systems at the intersection of
+          Computer Engineering student building systems at the intersection of
           <strong>physics</strong>, <strong>mathematics</strong>, and
-          <strong>computation</strong>—from FPGA-based real-time sensing and control
+          <strong>computation</strong> — from FPGA-based real-time sensing and control
           to high-performance C++ simulation engines and data analysis pipelines.
         </p>
         <p class="hero-sub">
-          I enjoy building bottom-up, rigorous implementations where theory and
-          hardware meet: embedded systems, FPGA/RTL, numerical models, and algorithmic
-          simulations.
+          I focus on bottom-up, rigorous implementations where theory and hardware meet:
+          embedded systems, FPGA/RTL design, numerical modeling, and algorithmic simulation.
         </p>
         <div class="hero-actions">
           <a href="#projects" class="btn primary">View Projects</a>
-          <a href="projects.html" class="btn ghost">Deep-Dive Case Studies</a>
+          <a href="#contact" class="btn ghost">Get in Touch</a>
         </div>
         <div class="hero-links">
-          <a href="mailto:02richardsondavid@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a>
-          <a href="https://www.linkedin.com/in/david-richardson-0099281b6/" target="_blank" rel="noopener">
+          <a href="mailto:02richardsondavid@gmail.com">
+            <i class="fa-solid fa-envelope"></i> Email
+          </a>
+          <a href="https://www.linkedin.com/in/david-richardson-0099281b6/"
+             target="_blank" rel="noopener">
             <i class="fa-brands fa-linkedin"></i> LinkedIn
           </a>
-          <a href="https://github.com/DavidRichardson02" target="_blank" rel="noopener">
+          <a href="https://github.com/DavidRichardson02"
+             target="_blank" rel="noopener">
             <i class="fa-brands fa-github"></i> GitHub
           </a>
         </div>
@@ -70,9 +77,9 @@
         <div class="hero-card">
           <h2>Current Focus</h2>
           <ul>
-            <li>FPGA Signal Control System (Nexys A7, VGA, ToF, PWM, UART)</li>
-            <li>High-performance C++ N-body simulations (Barnes–Hut)</li>
-            <li>Automated CSV data analysis and modeling pipeline</li>
+            <li>FPGA Signal Control System (Nexys A7: ToF, VGA HUD, UART, PWM)</li>
+            <li>High-performance C++ Barnes–Hut N-body simulations</li>
+            <li>Automated CSV data standardization and analysis pipeline</li>
           </ul>
         </div>
         <div class="hero-card">
@@ -80,49 +87,76 @@
           <ul>
             <li>B.S. Computer Engineering — University of Michigan–Dearborn</li>
             <li>Embedded systems • FPGA/RTL • C/C++ • Numerical modeling</li>
-            <li>Passionate about connecting theory to hardware and code</li>
+            <li>Driven by connecting rigorous theory to hardware and code</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========= ABOUT ========= -->
-  <section id="about" class="section section-alt">
+  <!-- ========= PROFILE / ABOUT ========= -->
+  <section id="about" class="section">
     <div class="container">
-      <h2 class="section-title">About Me</h2>
+      <h2 class="section-title">Profile</h2>
       <div class="grid-2">
         <div>
           <p>
-            I’m a Computer Engineering student with a strong foundation in
-            digital systems, embedded hardware, high-performance C/C++ programming,
-            and numerical modeling. I’m particularly motivated by the interplay of
-            physics, mathematics, and computer science, and I enjoy building systems
-            that unify rigorous theory with practical implementation.
+            I am a Computer Engineering student with a strong foundation in circuit design,
+            embedded systems, scientific computing, and high-performance C/C++ development.
+            My work is grounded in the mathematical and physical principles that underlie
+            computation, which helps me design systems that are numerically robust,
+            hardware-aware, and optimized from first principles.
           </p>
           <p>
-            My projects range from FPGA-based real-time signal control and telemetry,
-            to spatial data structure–driven simulation engines, to robust C++ data
-            analysis pipelines. I tend to work bottom-up: understanding constraints at
-            the hardware, algorithm, and numerical levels, then designing clean
-            architectures and interfaces around them.
+            I’ve built projects that span FPGA-based real-time sensing and control, ToF
+            telemetry pipelines, N-body simulation frameworks using spatial data structures,
+            and robust C++ data analysis tooling. I enjoy working where hardware, software,
+            and mathematical models converge.
           </p>
         </div>
         <div>
           <p>
-            I’m especially interested in roles and projects involving:
+            I am particularly interested in opportunities involving:
           </p>
           <ul class="bullet-list">
-            <li>Embedded and FPGA-based systems</li>
+            <li>Embedded systems and FPGA/RTL-based digital design</li>
             <li>High-performance numerical simulation and modeling</li>
-            <li>Signal processing, control, and real-time telemetry</li>
-            <li>Data analysis, visualization, and tool-building</li>
+            <li>Signal processing, control, and real-time telemetry systems</li>
+            <li>Data analysis, visualization, and technical tool-building</li>
           </ul>
           <p>
-            Long term, I want to work on complex, interdisciplinary systems where
-            careful engineering, mathematical insight, and physical intuition all
-            matter—whether in research labs, R&amp;D teams, or advanced product
-            development.
+            Long term, I aim to contribute to technically rigorous teams—whether in research,
+            R&amp;D, or product engineering—focused on complex, interdisciplinary systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= EDUCATION ========= -->
+  <section id="education" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Education</h2>
+      <div class="grid-2">
+        <div>
+          <h3>B.S. Computer Engineering</h3>
+          <p>
+            <strong>University of Michigan–Dearborn</strong><br />
+            2021 – Present &nbsp;•&nbsp; Dearborn, MI
+          </p>
+          <p style="font-size: 0.9rem; color: var(--muted);">
+            Coursework and projects spanning digital systems, embedded systems, FPGA/RTL design,
+            numerical methods, and scientific computing.
+          </p>
+        </div>
+        <div>
+          <h3>Brother Rice High School</h3>
+          <p>
+            2017 – 2021 &nbsp;•&nbsp; Bloomfield Hills, MI
+          </p>
+          <p style="font-size: 0.9rem; color: var(--muted);">
+            Graduated with a strong foundation in mathematics, physics, and problem-solving,
+            which became the basis for my later work in engineering and computation.
           </p>
         </div>
       </div>
@@ -136,44 +170,61 @@
 
       <div class="skills-grid">
         <div class="skill-card">
-          <h3>Programming</h3>
-          <p>C, Modern C++17, MATLAB, HCS12 &amp; x86 Assembly, Verilog, VHDL, Bash, LaTeX, Markdown</p>
+          <h3>Languages</h3>
+          <p>
+            C, Modern C++17, MATLAB, Verilog, VHDL, Bash, HCS12 &amp; x86 Assembly,
+            LaTeX, Markdown
+          </p>
         </div>
 
         <div class="skill-card">
-          <h3>Algorithms &amp; HPC</h3>
-          <p>Parallel STL, OpenMP, Eigen, FFTW, spatial trees (Quadtree/Octree), Barnes–Hut N-body, numerical simulation</p>
+          <h3>Algorithms &amp; Numerical</h3>
+          <p>
+            Barnes–Hut N-body kernels, spatial hashing, fixed-point modeling,
+            Eigen, FFTW, OpenMP, STL parallel algorithms
+          </p>
         </div>
 
         <div class="skill-card">
           <h3>Embedded &amp; Hardware</h3>
-          <p>HCS12, ARM Cortex-M, Arduino, UART/I²C/SPI, Analog Discovery 2, Nexys A7 FPGA, EK-TM4C123GXL, PCB layout</p>
+          <p>
+            HCS12, ARM Cortex-M, Arduino, UART/I²C/SPI, Analog Discovery 2,
+            Nexys A7 (Artix-7 FPGA), EK-TM4C123GXL, PCB layout
+          </p>
         </div>
 
         <div class="skill-card">
           <h3>Frameworks &amp; Libraries</h3>
-          <p>openFrameworks, Qt (Widgets &amp; QML), ImGui, Boost, GLM, Armadillo</p>
+          <p>
+            openFrameworks, Qt (Widgets &amp; QML), ImGui, Boost, GLM, Armadillo
+          </p>
         </div>
 
         <div class="skill-card">
           <h3>Simulation &amp; EDA</h3>
-          <p>MATLAB/Simulink, LTspice, PSpice, Multisim, WaveForms, Vivado RTL &amp; timing analysis</p>
+          <p>
+            MATLAB/Simulink, LTspice, PSpice, Multisim, WaveForms, Vivado Design Suite
+          </p>
         </div>
 
         <div class="skill-card">
-          <h3>Tools &amp; Platforms</h3>
-          <p>Git, GitHub Actions CI, CMake, Ninja/Make, Visual Studio, Xcode, Qt Creator, CodeWarrior, uKeil, Parallels, macOS, Linux, Windows</p>
+          <h3>Dev Tools &amp; Platforms</h3>
+          <p>
+            Git, GitHub Actions (CI), CMake, Ninja/Make, Visual Studio, Xcode,
+            Qt Creator, CodeWarrior, uKeil, Parallels, macOS, Linux (Ubuntu &amp; Arch),
+            Windows 10/11
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========= PROJECTS (OVERVIEW) ========= -->
+  <!-- ========= PROJECTS ========= -->
   <section id="projects" class="section section-alt">
     <div class="container">
-      <h2 class="section-title">Featured Projects (Overview)</h2>
+      <h2 class="section-title">Featured Projects</h2>
 
-      <!-- Project 1 -->
+      <!-- FPGA Signal Control System -->
       <article class="project-card">
         <div class="project-header">
           <h3>FPGA Signal Control System</h3>
@@ -181,65 +232,146 @@
         </div>
         <p class="project-summary">
           Integrated real-time sensing, control, and visualization framework on a Nexys A7 FPGA:
-          ToF distance mapping, PWM fan control, UART telemetry, VGA overlays, and PIR-based activity detection.
+          ToF distance mapping, PWM fan control, UART telemetry, VGA overlays, PIR-based
+          occupancy, and rotary encoder–driven surveying.
         </p>
+        <ul class="project-details">
+          <li>Designed CDC-safe Verilog modules for ToF polling, UART streaming, PWM generation, and VGA HUD rendering.</li>
+          <li>Implemented Q1.15 fixed-point math, packetized telemetry with timestamps and status, and a range-plot framebuffer engine.</li>
+        </ul>
         <div class="project-links">
-          <a href="projects.html#fpga-signal-control"><i class="fa-solid fa-arrow-right"></i> Deep dive</a>
-          <a href="https://github.com/DavidRichardson02/FPGA_Signal_Control_System" target="_blank" rel="noopener">
-            <i class="fa-brands fa-github"></i> GitHub
+          <a href="https://github.com/DavidRichardson02/FPGA_Signal_Control_System"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View on GitHub
           </a>
         </div>
       </article>
 
-      <!-- Project 2 -->
+      <!-- Generic Quadtree Barnes–Hut N-Body -->
       <article class="project-card">
         <div class="project-header">
           <h3>Generic Quadtree Barnes–Hut N-Body Simulator</h3>
           <span class="project-tag">C++17 • Numerical Simulation</span>
         </div>
         <p class="project-summary">
-          Real-time 2D interactive N-body engine with quadtree spatial partitioning and Barnes–Hut approximation
-          for large-scale particle systems.
+          Real-time 2D interactive N-body engine using quadtree spatial partitioning and
+          Barnes–Hut approximation for large-scale particle systems.
         </p>
+        <ul class="project-details">
+          <li>Built a modular C++ quadtree for adaptive force approximation and efficient neighbor queries.</li>
+          <li>Integrated stable time-stepping and visualization to explore gravitational dynamics interactively.</li>
+        </ul>
         <div class="project-links">
-          <a href="projects.html#bh-quadtree"><i class="fa-solid fa-arrow-right"></i> Deep dive</a>
-          <a href="https://github.com/DavidRichardson02/Generic-Quadtree-Barnes-Hut-N-Body-Simulator-0_1" target="_blank" rel="noopener">
-            <i class="fa-brands fa-github"></i> GitHub
+          <a href="https://github.com/DavidRichardson02/Generic-Quadtree-Barnes-Hut-N-Body-Simulator-0_1"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View on GitHub
           </a>
         </div>
       </article>
 
-      <!-- Project 3 -->
+      <!-- Hashed-Octree 3D Barnes–Hut -->
       <article class="project-card">
         <div class="project-header">
           <h3>Serial Hashed-Octree Barnes–Hut 3D Simulator</h3>
           <span class="project-tag">C++17 • Spatial Data Structures</span>
         </div>
         <p class="project-summary">
-          3D N-body simulation framework using a Morton-ordered hashed octree for scalable force computations and improved memory locality.
+          3D N-body simulation framework using a Morton-ordered hashed octree for scalable
+          force computations and improved memory locality.
         </p>
+        <ul class="project-details">
+          <li>Implemented hashed octrees with Morton codes (Z-ordering) to improve cache locality.</li>
+          <li>Developed 3D Barnes–Hut kernels suitable for serial high-performance evaluation and future parallelization.</li>
+        </ul>
         <div class="project-links">
-          <a href="projects.html#bh-octree"><i class="fa-solid fa-arrow-right"></i> Deep dive</a>
-          <a href="https://github.com/DavidRichardson02/Serial-Hashed-Octree-Barnes-Hut-N-Body-Simulator-0_3" target="_blank" rel="noopener">
-            <i class="fa-brands fa-github"></i> GitHub
+          <a href="https://github.com/DavidRichardson02/Serial-Hashed-Octree-Barnes-Hut-N-Body-Simulator-0_3"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View on GitHub
           </a>
         </div>
       </article>
 
-      <!-- Project 4 -->
+      <!-- Automated CSV Analysis -->
       <article class="project-card">
         <div class="project-header">
-          <h3>Automated CSV Dataset Analysis &amp; Modeling</h3>
+          <h3>Automated CSV Dataset Standardization, Analysis, and Modeling</h3>
           <span class="project-tag">C++17 • Data Analysis</span>
         </div>
         <p class="project-summary">
-          Modular C++ analytics engine for large scientific datasets, providing schema inference, transformation,
-          statistical modeling, and visualization.
+          Modular C++ analytics engine for large scientific datasets, providing schema
+          inference, transformation, statistical modeling, and diagnostics.
         </p>
+        <ul class="project-details">
+          <li>Designed custom tokenizers, parsers, and columnar representations for heterogeneous CSV data.</li>
+          <li>Implemented utilities for standardization, integrity checks, and high-level modeling across multiple datasets.</li>
+        </ul>
         <div class="project-links">
-          <a href="projects.html#csv-analysis"><i class="fa-solid fa-arrow-right"></i> Deep dive</a>
-          <a href="https://github.com/DavidRichardson02/Automated_CSV_Data_Analysis" target="_blank" rel="noopener">
-            <i class="fa-brands fa-github"></i> GitHub
+          <a href="https://github.com/DavidRichardson02/Automated_CSV_Data_Analysis"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View on GitHub
+          </a>
+        </div>
+      </article>
+
+      <!-- OpenFrameworks UI Library -->
+      <article class="project-card">
+        <div class="project-header">
+          <h3>OpenFrameworks User-Interface Library</h3>
+          <span class="project-tag">C++ • UI Systems</span>
+        </div>
+        <p class="project-summary">
+          Lightweight UI layer for OpenFrameworks, supporting reusable widgets, event dispatch,
+          and layered rendering for visualization tools.
+        </p>
+        <ul class="project-details">
+          <li>Designed composable GUI components for graphics and simulation control panels.</li>
+        </ul>
+        <div class="project-links">
+          <a href="https://github.com/DavidRichardson02/OpenFrameworks_User_Interface_Library"
+             target="_blank" rel="noopener">
+            <i class="fa-brands fa-github"></i> View on GitHub
+          </a>
+        </div>
+      </article>
+
+      <!-- People Prompted Provisory Power -->
+      <article class="project-card">
+        <div class="project-header">
+          <h3>People Prompted Provisory Power (HCS12)</h3>
+          <span class="project-tag">Embedded • Power Management</span>
+        </div>
+        <p class="project-summary">
+          On-demand power management system using the HCS12 microcontroller with
+          motion-triggered control of load behavior.
+        </p>
+        <ul class="project-details">
+          <li>Implemented motion-driven duty cycling and control logic for responsive power usage.</li>
+        </ul>
+        <div class="project-links">
+          <a href="https://drive.google.com/file/d/13ptBMCBfXSXuCDu-JlrmT38IY9LJqymR/view"
+             target="_blank" rel="noopener">
+            <i class="fa-solid fa-file-lines"></i> View Report
+          </a>
+        </div>
+      </article>
+
+      <!-- Voltage Regulator Design -->
+      <article class="project-card">
+        <div class="project-header">
+          <h3>Discrete Linear Voltage Regulator Design</h3>
+          <span class="project-tag">Analog • Simulation</span>
+        </div>
+        <p class="project-summary">
+          Rigorous analysis and design of a discrete linear voltage regulator including loop
+          stability, load regulation, and thermal behavior.
+        </p>
+        <ul class="project-details">
+          <li>Used LTspice and theoretical derivations to validate performance across line and load variations.</li>
+        </ul>
+        <div class="project-links">
+          <a href="https://drive.google.com/file/d/17EJT2hjBfJR-BRmtBBEozavgAhClJIIc/view?usp=drive_link"
+             target="_blank" rel="noopener">
+            <i class="fa-solid fa-file-lines"></i> View Report
           </a>
         </div>
       </article>
@@ -258,17 +390,38 @@
             or potential roles and collaborations, feel free to reach out.
           </p>
           <ul class="contact-list">
-            <li><i class="fa-solid fa-envelope"></i> <a href="mailto:02richardsondavid@gmail.com">02richardsondavid@gmail.com</a></li>
-            <li><i class="fa-brands fa-linkedin"></i> <a href="https://www.linkedin.com/in/david-richardson-0099281b6/" target="_blank" rel="noopener">linkedin.com/in/david-richardson-0099281b6/</a></li>
-            <li><i class="fa-brands fa-github"></i> <a href="https://github.com/DavidRichardson02" target="_blank" rel="noopener">github.com/DavidRichardson02</a></li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:02richardsondavid@gmail.com">02richardsondavid@gmail.com</a>
+            </li>
+            <li>
+              <i class="fa-brands fa-linkedin"></i>
+              <a href="https://www.linkedin.com/in/david-richardson-0099281b6/"
+                 target="_blank" rel="noopener">
+                linkedin.com/in/david-richardson-0099281b6/
+              </a>
+            </li>
+            <li>
+              <i class="fa-brands fa-github"></i>
+              <a href="https://github.com/DavidRichardson02"
+                 target="_blank" rel="noopener">
+                github.com/DavidRichardson02
+              </a>
+            </li>
           </ul>
         </div>
         <div>
           <p>
-            You can also find my résumé and additional project documentation on GitHub and
-            in my engineering reports. I’m open to internships, research opportunities, and
-            early-career roles in embedded systems, FPGA design, and simulation-heavy
-            software engineering.
+            Formal references available upon request, including:
+          </p>
+          <ul class="bullet-list" style="font-size: 0.9rem;">
+            <li>Professor Azeem Hafeez — <a href="mailto:azeemh@umich.edu">azeemh@umich.edu</a></li>
+            <li>Professor Paul Watta — <a href="mailto:watta@umich.edu">watta@umich.edu</a></li>
+            <li>Tom Krzyzak — 586-344-9097</li>
+          </ul>
+          <p style="margin-top: 0.75rem;">
+            I’m open to internships, research positions, and early-career engineering roles
+            in embedded systems, FPGA/RTL, and simulation-heavy software.
           </p>
         </div>
       </div>
@@ -279,9 +432,10 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <span>&copy; <span id="year"></span> David Richardson</span>
-      <span>Built with HTML &amp; CSS • Hosted on GitHub Pages</span>
+      <span>Built with HTML &amp; CSS • Suitable for GitHub Pages</span>
     </div>
     <script>
+      // Keep the footer year up to date
       document.getElementById('year').textContent = new Date().getFullYear();
     </script>
   </footer>
