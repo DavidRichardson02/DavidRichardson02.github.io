@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projects Deep Dives | David Richardson</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Deep-dive engineering case studies by David Richardson — FPGA systems, C++ simulation engines, and data analysis pipelines." />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+</head>
+<body>
+  <!-- ========= NAVBAR ========= -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="brand">
+        <span class="brand-name">David Richardson</span>
+        <span class="brand-tagline">Engineering Case Studies</span>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="projects.html">Deep Dives</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========= INTRO ========= -->
+  <section class="section hero-compact">
+    <div class="container">
+      <h1 class="page-title">Project Deep Dives</h1>
+      <p class="page-intro">
+        A closer look at a few of my projects: architecture, design decisions,
+        implementation details, and engineering trade-offs.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========= FPGA SIGNAL CONTROL SYSTEM ========= -->
+  <section id="fpga-signal-control" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">FPGA Signal Control System</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            A real-time sensing and control framework on a Nexys A7 FPGA integrating:
+            ToF distance mapping, PWM fan control, UART telemetry streaming, VGA HUD overlays,
+            and PIR-based motion detection.
+          </p>
+          <h3 class="subheading">Architecture</h3>
+          <ul class="bullet-list">
+            <li>ToF sensor engine with I²C master, IRQ handling, and sample cadence control.</li>
+            <li>UART packetizer encoding timestamped distance and angle data with status/CRC.</li>
+            <li>VGA range-plot framebuffer plus HUD overlay rendering temperature, fan duty, PIR status, and UART activity.</li>
+            <li>PWM fan control loop using Q1.15 fixed-point temperature measurements.</li>
+          </ul>
+
+          <h3 class="subheading">Key Engineering Decisions</h3>
+          <ul class="bullet-list">
+            <li>CDC-safe interfaces between 100 MHz system clock and 25 MHz pixel clock domains.</li>
+            <li>Use of opcode-style documentation and hierarchical Verilog modules to keep the design maintainable.</li>
+            <li>Integration with WaveForms and MATLAB for correlated digital/analog debugging.</li>
+          </ul>
+
+          <div class="project-links">
+            <a href="https://github.com/DavidRichardson02/FPGA_Signal_Control_System" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subheading">Gallery</h3>
+          <div class="gallery-grid">
+            <!-- Replace these src paths with your actual images -->
+            <figure>
+              <img src="images/fpga_vga_overlay.png" alt="VGA HUD and range plot" />
+              <figcaption>VGA range plot with status HUD overlay.</figcaption>
+            </figure>
+            <figure>
+              <img src="images/fpga_board_setup.png" alt="Nexys A7 FPGA board setup" />
+              <figcaption>Nexys A7 board with ToF sensor, fan, and instrumentation.</figcaption>
+            </figure>
+            <figure>
+              <img src="images/fpga_waveforms.png" alt="Waveforms capture of PWM and I2C" />
+              <figcaption>Waveforms capture showing PWM, I²C, and UART activity.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= BARNES–HUT QUADTREE ========= -->
+  <section id="bh-quadtree" class="section">
+    <div class="container">
+      <h2 class="section-title">Generic Quadtree Barnes–Hut N-Body Simulator</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            A 2D interactive N-body simulation engine built in modern C++17 using a quadtree
+            spatial partitioning scheme and the Barnes–Hut approximation to support large systems
+            in real time.
+          </p>
+
+          <h3 class="subheading">Core Ideas</h3>
+          <ul class="bullet-list">
+            <li>Adaptive quadtree subdivision based on particle distribution and depth limits.</li>
+            <li>Force aggregation using center-of-mass approximations for distant cells.</li>
+            <li>Careful timestep integration decisions to balance stability and responsiveness.</li>
+          </ul>
+
+          <h3 class="subheading">Implementation Details</h3>
+          <ul class="bullet-list">
+            <li>Template-based quadtree structure with configurable force law and thresholds.</li>
+            <li>Use of Eigen/GLM-style math primitives and standard containers.</li>
+            <li>Visualization loop designed for real-time interaction and debugging.</li>
+          </ul>
+
+          <div class="project-links">
+            <a href="https://github.com/DavidRichardson02/Generic-Quadtree-Barnes-Hut-N-Body-Simulator-0_1" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subheading">Gallery</h3>
+          <div class="gallery-grid">
+            <figure>
+              <img src="images/quadtree_particles.png" alt="Quadtree overlay on particles" />
+              <figcaption>Quadtree overlay showing adaptive spatial subdivision.</figcaption>
+            </figure>
+            <figure>
+              <img src="images/quadtree_trails.png" alt="Particle trajectories" />
+              <figcaption>Particle trajectories under gravitational dynamics.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= BARNES–HUT OCTREE ========= -->
+  <section id="bh-octree" class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">Serial Hashed-Octree Barnes–Hut 3D Simulator</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            A 3D extension of the Barnes–Hut simulation concept using a Morton-ordered hashed
+            octree to support better memory locality and efficient 3D force evaluation.
+          </p>
+
+          <h3 class="subheading">Architecture</h3>
+          <ul class="bullet-list">
+            <li>Morton-coded (Z-order) indexing for octree nodes to improve cache behavior.</li>
+            <li>Hashed storage of octree nodes rather than purely pointer-based trees.</li>
+            <li>3D center-of-mass aggregation and angle-based criteria for approximation.</li>
+          </ul>
+
+          <h3 class="subheading">Design Notes</h3>
+          <ul class="bullet-list">
+            <li>Focus on clear serial design first, with an eye toward future parallelization.</li>
+            <li>Low-level profiling to understand memory access patterns and hotspots.</li>
+          </ul>
+
+          <div class="project-links">
+            <a href="https://github.com/DavidRichardson02/Serial-Hashed-Octree-Barnes-Hut-N-Body-Simulator-0_3" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subheading">Gallery</h3>
+          <div class="gallery-grid">
+            <figure>
+              <img src="images/octree_structure.png" alt="Octree structure visualization" />
+              <figcaption>3D octree structure used for hierarchical force approximation.</figcaption>
+            </figure>
+            <figure>
+              <img src="images/octree_orbits.png" alt="3D particle orbits" />
+              <figcaption>Simulated orbits and trajectories in a 3D field.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= CSV ANALYSIS ENGINE ========= -->
+  <section id="csv-analysis" class="section">
+    <div class="container">
+      <h2 class="section-title">Automated CSV Dataset Analysis &amp; Modeling</h2>
+
+      <div class="grid-2">
+        <div>
+          <p>
+            A modular C++17 analytics engine for structured scientific datasets, focusing on
+            schema inference, standardization, diagnostics, and modeling for CSV-based workflows.
+          </p>
+
+          <h3 class="subheading">Key Components</h3>
+          <ul class="bullet-list">
+            <li>Custom tokenization and parsing pipeline resilient to malformed rows and mixed types.</li>
+            <li>Columnar data representation to support efficient scanning, transforms, and statistics.</li>
+            <li>Hooks for visualization and model-fitting on top of the standardized data structures.</li>
+          </ul>
+
+          <h3 class="subheading">Use Cases</h3>
+          <ul class="bullet-list">
+            <li>Rapid exploration of experimental logs and simulation outputs.</li>
+            <li>Repeatable data-cleaning and feature extraction pipelines for later analysis.</li>
+          </ul>
+
+          <div class="project-links">
+            <a href="https://github.com/DavidRichardson02/Automated_CSV_Data_Analysis" target="_blank" rel="noopener">
+              <i class="fa-brands fa-github"></i> View on GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="subheading">Gallery</h3>
+          <div class="gallery-grid">
+            <figure>
+              <img src="images/csv_schema.png" alt="Schema inference diagram" />
+              <figcaption>Diagram of the schema inference and validation pipeline.</figcaption>
+            </figure>
+            <figure>
+              <img src="images/csv_plots.png" alt="Plots from CSV analytics" />
+              <figcaption>Example visualizations generated from standardized datasets.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= FOOTER ========= -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <span>&copy; <span id="year"></span> David Richardson</span>
+      <span>Engineering Case Studies • GitHub Pages</span>
+    </div>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </footer>
+</body>
+</html>
