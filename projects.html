@@ -2,264 +2,336 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Projects Deep Dives | David Richardson</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Deep-dive engineering case studies by David Richardson — FPGA systems, C++ simulation engines, and data analysis pipelines." />
-
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#07111f" />
+  <title>Engineering Case Studies | David Richardson</title>
+  <meta name="description" content="Engineering case studies covering FPGA avionics, sonar-vision fusion, telemetry analysis, real-time control, and Barnes–Hut simulation work by David Richardson." />
   <link rel="stylesheet" href="style.css" />
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
 </head>
 <body>
-  <!-- ========= NAVBAR ========= -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <header class="site-header">
-    <div class="container nav-container">
-      <div class="brand">
-        <span class="brand-name">David Richardson</span>
-        <span class="brand-tagline">Engineering Case Studies</span>
-      </div>
-      <nav class="main-nav">
-        <a href="index.html#home">Home</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#skills">Skills</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="projects.html">Deep Dives</a>
+    <div class="container nav-shell">
+      <a class="brand" href="index.html" aria-label="David Richardson portfolio home">
+        <span class="brand-mark">DR</span>
+        <span>
+          <strong>David Richardson</strong>
+          <small>Engineering case studies</small>
+        </span>
+      </a>
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html">Overview</a>
+        <a href="#hardware">FPGA systems</a>
+        <a href="#software">Software</a>
+        <a href="index.html#documents">Documents</a>
         <a href="index.html#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- ========= INTRO ========= -->
-  <section class="section hero-compact">
-    <div class="container">
-      <h1 class="page-title">Project Deep Dives</h1>
-      <p class="page-intro">
-        A closer look at a few of my projects: architecture, design decisions,
-        implementation details, and engineering trade-offs.
-      </p>
-    </div>
-  </section>
-
-  <!-- ========= FPGA SIGNAL CONTROL SYSTEM ========= -->
-  <section id="fpga-signal-control" class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">FPGA Signal Control System</h2>
-
-      <div class="grid-2">
+  <main id="main-content">
+    <section class="case-hero">
+      <div class="container case-hero-grid">
         <div>
-          <p>
-            A real-time sensing and control framework on a Nexys A7 FPGA integrating:
-            ToF distance mapping, PWM fan control, UART telemetry streaming, VGA HUD overlays,
-            and PIR-based motion detection.
-          </p>
-          <h3 class="subheading">Architecture</h3>
-          <ul class="bullet-list">
-            <li>ToF sensor engine with I²C master, IRQ handling, and sample cadence control.</li>
-            <li>UART packetizer encoding timestamped distance and angle data with status/CRC.</li>
-            <li>VGA range-plot framebuffer plus HUD overlay rendering temperature, fan duty, PIR status, and UART activity.</li>
-            <li>PWM fan control loop using Q1.15 fixed-point temperature measurements.</li>
-          </ul>
+          <p class="eyebrow">Engineering case studies</p>
+          <h1>Architecture, evidence, and the next verification gate.</h1>
+        </div>
+        <p>These notes focus on what each system is intended to do, what has been implemented in the public repository, what evidence exists, and what remains before a stronger validation claim is justified.</p>
+      </div>
+    </section>
 
-          <h3 class="subheading">Key Engineering Decisions</h3>
-          <ul class="bullet-list">
-            <li>CDC-safe interfaces between 100 MHz system clock and 25 MHz pixel clock domains.</li>
-            <li>Use of opcode-style documentation and hierarchical Verilog modules to keep the design maintainable.</li>
-            <li>Integration with WaveForms and MATLAB for correlated digital/analog debugging.</li>
-          </ul>
+    <nav class="case-index" aria-label="Case study index">
+      <div class="container case-index-row">
+        <a href="#caelumfusion">CaelumFusion</a>
+        <a href="#offline-analysis">Offline analysis</a>
+        <a href="#aquafusion">AquaFusion</a>
+        <a href="#fpga-signal-control">Signal control</a>
+        <a href="#barnes-hut">Barnes–Hut</a>
+        <a href="#ui-library">UI library</a>
+        <a href="#data-tools">Data tools</a>
+      </div>
+    </nav>
 
-          <div class="project-links">
-            <a href="https://github.com/DavidRichardson02/FPGA_Signal_Control_System" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View on GitHub
-            </a>
+    <section class="section case-section" id="hardware">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FPGA systems</p>
+            <h2>Instrumentation-led RTL development</h2>
           </div>
+          <p>Each design separates data production, cross-domain publication, rendering or control policy, and evidence collection so failures remain localizable.</p>
         </div>
 
-        <div>
-          <h3 class="subheading">Gallery</h3>
-          <div class="gallery-grid">
-            <!-- Replace these src paths with your actual images -->
-            <figure>
-              <img src="images/fpga_vga_overlay.png" alt="VGA HUD and range plot" />
-              <figcaption>VGA range plot with status HUD overlay.</figcaption>
-            </figure>
-            <figure>
-              <img src="images/fpga_board_setup.png" alt="Nexys A7 FPGA board setup" />
-              <figcaption>Nexys A7 board with ToF sensor, fan, and instrumentation.</figcaption>
-            </figure>
-            <figure>
-              <img src="images/fpga_waveforms.png" alt="Waveforms capture of PWM and I2C" />
-              <figcaption>Waveforms capture showing PWM, I²C, and UART activity.</figcaption>
-            </figure>
+        <article class="case-study" id="caelumfusion">
+          <header class="case-title">
+            <div>
+              <span class="status-badge status-active">Active development</span>
+              <p class="project-kicker">Basys 3 · Artix-7 · Verilog · VGA</p>
+              <h3>CaelumFusion Flight Control System</h3>
+            </div>
+            <a class="button button-secondary" href="https://github.com/DavidRichardson02/CaelumFusion_Flight_System" target="_blank" rel="noopener noreferrer">Open repository</a>
+          </header>
+
+          <p class="case-intro">CaelumFusion is an FPGA-side avionics instrumentation environment rather than a claim of flight-ready autonomy. Its core concern is the trustworthy movement of evidence: from physical or synthetic producers, through typed snapshot contracts and domain crossings, into diagnostic visualization, logging, and policy observability.</p>
+
+          <div class="case-grid">
+            <section>
+              <h4>System architecture</h4>
+              <ul>
+                <li><code>caelumfusion_top_vga</code> owns the Basys 3 board interface and integration boundary.</li>
+                <li>I²C, SPI, GPIO, and UART producers publish payload, timestamp, sequence, validity, status, age, and source provenance.</li>
+                <li>SYS-domain visualization state crosses into the pixel domain through coherent toggle/snapshot CDC before frame-stable VGA rendering.</li>
+                <li>Extension evidence includes range, dual-magnetometer comparison, power, fault injection, guarded navigation/wind fields, and a versioned black-box stream.</li>
+              </ul>
+            </section>
+            <section>
+              <h4>Estimator and authority work</h4>
+              <ul>
+                <li>A fixed-point altitude/vertical-speed Kalman core and focused testbench are present.</li>
+                <li>Apogee-authority policy RTL is integrated into the visualization model as deterministic policy evidence.</li>
+                <li>Phase and safety-gate observability are separated from the final command owner.</li>
+                <li>The present policy remains an engineering model, not a calibrated aerodynamic controller.</li>
+              </ul>
+            </section>
+            <section class="evidence-panel">
+              <h4>Evidence currently present</h4>
+              <ul>
+                <li>Hand-authored RTL, XDC, Vivado project metadata, focused testbenches, Tcl flows, host decoders, and release checklists.</li>
+                <li>Targeted benches cover sensor-suite behavior, MAG1, PMON1, extension metadata, fault injection, render selection, science-page pixels, and UART bridge handling.</li>
+                <li>Generated runs and bitstreams are intentionally excluded from source control.</li>
+              </ul>
+            </section>
+            <section class="next-panel">
+              <h4>Next verification gate</h4>
+              <ul>
+                <li>Normalize the Vivado-version boundary around the project metadata.</li>
+                <li>Run fresh-library simulations and archive commit-specific PASS evidence.</li>
+                <li>Complete synthesis, implementation, DRC, CDC review, and timing closure in the selected tool version.</li>
+                <li>Finish external-UART and board-level sensor/display capture evidence before flight-style signoff.</li>
+              </ul>
+            </section>
           </div>
+        </article>
+
+        <article class="case-study" id="offline-analysis">
+          <header class="case-title">
+            <div>
+              <span class="status-badge status-active">Canonical V3 / V4 surface</span>
+              <p class="project-kicker">MATLAB · Firmware contracts · Replay</p>
+              <h3>Offline Flight Analysis Dashboard</h3>
+            </div>
+            <a class="button button-secondary" href="https://github.com/DavidRichardson02/Offline_Flight_Analysis_Dashboard" target="_blank" rel="noopener noreferrer">Open repository</a>
+          </header>
+
+          <p class="case-intro">The dashboard closes the loop between embedded telemetry and engineering review. It imports SD or serial logs, normalizes changing firmware schemas, reconstructs estimator behavior, and exposes uncertainty, freshness, causality, provenance, policy, and mission context without collapsing them into a single polished trajectory.</p>
+
+          <div class="case-grid case-grid-three">
+            <section>
+              <h4>Data contract</h4>
+              <ul>
+                <li>Strict and recovery-oriented import paths for SD CSV and firmware <code>HDR</code>/<code>TLM</code> serial captures.</li>
+                <li>Schema checks retain field order and separate firmware control targets from the IREC mission target.</li>
+                <li>Representative fixtures remain tracked; regenerated exports and local captures remain ignored.</li>
+              </ul>
+            </section>
+            <section>
+              <h4>Engineering analysis</h4>
+              <ul>
+                <li>Vertical replay surfaces innovation, covariance, bias, beta, and gate decisions.</li>
+                <li>Optional attitude, gravity-provenance, 3D/GPS EKF, wind, causality, and Monte Carlo views support deeper review.</li>
+                <li>Integrated dashboards cover flight state, sensor health, trajectory, policy, phase, uncertainty, and summary evidence.</li>
+              </ul>
+            </section>
+            <section class="next-panel">
+              <h4>Release gate</h4>
+              <p><code>validate_caelum_release</code> runs firmware/dashboard alignment, vertical-replay, IREC mission-profile, and live-telemetry-import checks, reporting an overall pass and throwing on a required-gate failure.</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="case-study" id="aquafusion">
+          <header class="case-title">
+            <div>
+              <span class="status-badge status-integration">Phase 4 integration</span>
+              <p class="project-kicker">Nexys Video · Pcam 5C · Sonar · HDMI</p>
+              <h3>AquaFusion Sonar Vision System</h3>
+            </div>
+            <a class="button button-secondary" href="https://github.com/DavidRichardson02/AquaFusion_Sonar_Vision_System_Phase_4" target="_blank" rel="noopener noreferrer">Open repository</a>
+          </header>
+
+          <p class="case-intro">AquaFusion combines camera, sonar, occupancy-map, telemetry, and debug surfaces across SYS, VID, and TMDS domains. The current Phase 4 work concentrates on reliable composition and observability: a visible panel should establish which portion of the path is alive even when upstream data is absent.</p>
+
+          <div class="flow-rail" aria-label="AquaFusion data flow">
+            <div><strong>SYS producers</strong><span>Camera control, sonar UART/PWM, status</span></div>
+            <div><strong>Snapshot CDC</strong><span>Stable multi-bit publication into VID</span></div>
+            <div><strong>Frame commit</strong><span>User-visible state changes at boundaries</span></div>
+            <div><strong>Composition</strong><span>Geometry-qualified camera, map, radar, UART, debug</span></div>
+          </div>
+
+          <div class="case-grid">
+            <section>
+              <h4>Recent integration progress</h4>
+              <ul>
+                <li>Replaced black-pixel transparency with explicit region ownership.</li>
+                <li>Added a bounded camera HUD viewport while retaining full-screen camera diagnostics.</li>
+                <li>Added an isolated sonar-map debug view and visible fallback panel shell.</li>
+                <li>Corrected dual-port map-memory read latency and low-occupancy color handling.</li>
+                <li>Corrected post-reset publication of the auxiliary view selector.</li>
+              </ul>
+            </section>
+            <section>
+              <h4>Sonar and display path</h4>
+              <ul>
+                <li>Sonar 1 can publish raw or filtered range evidence with watchdog, age, status, and rich telemetry.</li>
+                <li>The occupancy painter writes a dual-clock map consumed by a VID-domain renderer and region-qualified compositor.</li>
+                <li>Camera and sonar state are independently visible through diagnostic modes, lowering bring-up ambiguity.</li>
+                <li>OLED telemetry remains a separate SYS-domain output rather than an HDMI dependency.</li>
+              </ul>
+            </section>
+            <section class="evidence-panel">
+              <h4>Implemented boundary</h4>
+              <p>Repository source establishes the top-level integration, subsystem modules, view controls, CDC structure, map path, and staged bring-up sequence.</p>
+            </section>
+            <section class="next-panel">
+              <h4>Known limits / next gate</h4>
+              <p>Sonar 2 remains disabled; live bearing validity is not yet supplied; the HUD viewport does not scale; CLS is commented out. Elaboration, simulation, implementation/timing, and bench evidence must remain separately reported.</p>
+            </section>
+          </div>
+        </article>
+
+        <article class="case-study case-with-media" id="fpga-signal-control">
+          <div class="case-media">
+            <img src="https://github.com/user-attachments/assets/ab0b8ce5-7643-4320-ab20-72e9109e54fd" alt="Nexys A7 FPGA Signal Control System setup and display" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <header class="case-title">
+              <div>
+                <span class="status-badge status-established">Integrated system</span>
+                <p class="project-kicker">Nexys A7-100T · 100 MHz · No soft CPU</p>
+                <h3>FPGA Signal Control System</h3>
+              </div>
+            </header>
+            <p class="case-intro">A hardware-only spatial mapping and temperature-control lab built as a single-clock design. Clock enables pace slow functions while sensing, control, graphics, and telemetry remain synchronous to the 100 MHz board clock.</p>
+            <div class="case-grid case-grid-three">
+              <section><h4>Sensing</h4><p>ISL29501 ToF over I²C, XADC temperature in Q1.15, PIR conditioning, and rotary surveyor input.</p></section>
+              <section><h4>Control</h4><p>Temperature, occupancy, and manual fan contributions feed an FSM and PWM drive with hysteresis and visible source flags.</p></section>
+              <section><h4>Visualization</h4><p>640×480 VGA range plotting and HUD output, a double-buffered RGB444 viewport, and CRC-framed UART telemetry at 2 Mbit/s for MATLAB decoding.</p></section>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/DavidRichardson02/FPGA_Signal_Control_System" target="_blank" rel="noopener noreferrer">Open repository</a>
+              <a href="https://raw.githubusercontent.com/DavidRichardson02/FPGA_Signal_Control_System/main/docs/FPGA_Walkthrough_Cinematic.gif" target="_blank" rel="noopener noreferrer">Open project walkthrough</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-alt case-section" id="software">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Software and simulation</p>
+            <h2>Reusable tools and algorithmic experiments</h2>
+          </div>
+          <p>These projects move from interactive scientific visualization toward reusable interface, data, and spatial-computing infrastructure.</p>
+        </div>
+
+        <article class="case-study case-with-media" id="barnes-hut">
+          <div class="case-media case-media-tall">
+            <img src="https://github.com/user-attachments/assets/6d6cb0a5-3403-4b91-85a8-4d990bce3af9" alt="Quadtree Barnes-Hut N-body simulation with spatial subdivision" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <span class="status-badge status-research">Directed-study sequence</span>
+            <p class="project-kicker">C++ · openFrameworks · Spatial decomposition</p>
+            <h3>Barnes–Hut N-Body Simulators</h3>
+            <p class="case-intro">The two repositories expose successive spatial representations for approximate gravitational force evaluation: a working pointer-based 2D quadtree and a 3D hashed-octree research prototype based on Morton ordering.</p>
+            <div class="case-grid">
+              <section>
+                <h4>Generic quadtree</h4>
+                <p>The simulation logic is complete and interactive. Current work is architectural: separating simulation entities, force approximation, visualization, and UI management so the project can serve as a clearer educational and reusable codebase.</p>
+                <a href="https://github.com/DavidRichardson02/Generic-Quadtree-Barnes-Hut-N-Body-Simulator-0_1" target="_blank" rel="noopener noreferrer">Open quadtree repository</a>
+              </section>
+              <section>
+                <h4>Hashed octree</h4>
+                <p>The 3D variant explores hashed nodes and Morton keys to improve locality and form a cleaner basis for later parallel construction, dynamic load distribution, and interaction evaluation. The public repository remains a development-stage research artifact.</p>
+                <a href="https://github.com/DavidRichardson02/Serial-Hashed-Octree-Barnes-Hut-N-Body-Simulator-0_3" target="_blank" rel="noopener noreferrer">Open octree repository</a>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-study case-with-media" id="ui-library">
+          <div class="case-media">
+            <img src="https://github.com/user-attachments/assets/c9ca29b9-48d7-483f-b1c7-24d645e94643" alt="OpenFrameworks scientific interface components" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <span class="status-badge status-wip">Usable / still hardening</span>
+            <p class="project-kicker">C++17 · Header-first · openFrameworks</p>
+            <h3>OpenFrameworks User Interface Library</h3>
+            <p class="case-intro">A lightweight collection of programmatic widgets extracted from simulation work: direct-input controls, validated numeric text fields, sliders, tables, table managers, tooltips, and drag-selection surfaces.</p>
+            <div class="case-grid">
+              <section><h4>Design</h4><p>Controls own drawing and interaction state, expose callbacks, and can be composed through table and manager hierarchies without XML layouts or external GUI add-ons.</p></section>
+              <section><h4>Current boundary</h4><p>The library is usable for internal tools and prototypes. Auto-layout edge cases, a theme/skin layer, automated tests, and CI remain roadmap items.</p></section>
+            </div>
+            <div class="card-links"><a href="https://github.com/DavidRichardson02/OpenFrameworks_User_Interface_Library" target="_blank" rel="noopener noreferrer">Open repository</a></div>
+          </div>
+        </article>
+
+        <article class="case-study" id="data-tools">
+          <header class="case-title">
+            <div>
+              <span class="status-badge">Data and application tooling</span>
+              <p class="project-kicker">C · MATLAB · Programmatic UI</p>
+              <h3>Analysis and scientific application tools</h3>
+            </div>
+          </header>
+          <div class="case-grid case-grid-three">
+            <section>
+              <h4>Automated CSV Data Analysis</h4>
+              <p>A C pipeline for parsing heterogeneous delimited data, inferring field types, normalizing date/time and unit-bearing values, extracting numeric columns, computing descriptive statistics and Anderson–Darling diagnostics, and generating structured MATLAB modeling inputs.</p>
+              <a href="https://github.com/DavidRichardson02/Automated_CSV_Data_Analysis" target="_blank" rel="noopener noreferrer">Open repository</a>
+            </section>
+            <section>
+              <h4>MATLAB Scientific Calculator</h4>
+              <p>A fully programmatic, modular calculator interface with class-separated controls, custom expression validation, editable input, live mirroring, result history, and source-controlled layout.</p>
+              <a href="https://github.com/DavidRichardson02/MATLAB_Programmatic_Calculator_App" target="_blank" rel="noopener noreferrer">Open repository</a>
+            </section>
+            <section>
+              <h4>Fourier Geometric Visualization</h4>
+              <p>An interactive discrete-Fourier-transform visualization that reconstructs arbitrary drawn paths through harmonic-circle composition, connecting complex coefficients to visible geometry.</p>
+              <a href="https://github.com/DavidRichardson02/Fourier_Geometric_Visualization" target="_blank" rel="noopener noreferrer">Open repository</a>
+            </section>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section contact-section">
+      <div class="container contact-shell">
+        <div>
+          <p class="eyebrow">Continue the review</p>
+          <h2>Source, reports, and implementation notes are linked throughout.</h2>
+          <p>For discussion of a specific architecture, verification boundary, or engineering opportunity, email is the most direct route.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button button-primary" href="mailto:02richardsondavid@gmail.com">Send an email</a>
+          <a class="button button-secondary" href="index.html">Return to overview</a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- ========= BARNES–HUT QUADTREE ========= -->
-  <section id="bh-quadtree" class="section">
-    <div class="container">
-      <h2 class="section-title">Generic Quadtree Barnes–Hut N-Body Simulator</h2>
-
-      <div class="grid-2">
-        <div>
-          <p>
-            A 2D interactive N-body simulation engine built in modern C++17 using a quadtree
-            spatial partitioning scheme and the Barnes–Hut approximation to support large systems
-            in real time.
-          </p>
-
-          <h3 class="subheading">Core Ideas</h3>
-          <ul class="bullet-list">
-            <li>Adaptive quadtree subdivision based on particle distribution and depth limits.</li>
-            <li>Force aggregation using center-of-mass approximations for distant cells.</li>
-            <li>Careful timestep integration decisions to balance stability and responsiveness.</li>
-          </ul>
-
-          <h3 class="subheading">Implementation Details</h3>
-          <ul class="bullet-list">
-            <li>Template-based quadtree structure with configurable force law and thresholds.</li>
-            <li>Use of Eigen/GLM-style math primitives and standard containers.</li>
-            <li>Visualization loop designed for real-time interaction and debugging.</li>
-          </ul>
-
-          <div class="project-links">
-            <a href="https://github.com/DavidRichardson02/Generic-Quadtree-Barnes-Hut-N-Body-Simulator-0_1" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="subheading">Gallery</h3>
-          <div class="gallery-grid">
-            <figure>
-              <img src="images/quadtree_particles.png" alt="Quadtree overlay on particles" />
-              <figcaption>Quadtree overlay showing adaptive spatial subdivision.</figcaption>
-            </figure>
-            <figure>
-              <img src="images/quadtree_trails.png" alt="Particle trajectories" />
-              <figcaption>Particle trajectories under gravitational dynamics.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= BARNES–HUT OCTREE ========= -->
-  <section id="bh-octree" class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">Serial Hashed-Octree Barnes–Hut 3D Simulator</h2>
-
-      <div class="grid-2">
-        <div>
-          <p>
-            A 3D extension of the Barnes–Hut simulation concept using a Morton-ordered hashed
-            octree to support better memory locality and efficient 3D force evaluation.
-          </p>
-
-          <h3 class="subheading">Architecture</h3>
-          <ul class="bullet-list">
-            <li>Morton-coded (Z-order) indexing for octree nodes to improve cache behavior.</li>
-            <li>Hashed storage of octree nodes rather than purely pointer-based trees.</li>
-            <li>3D center-of-mass aggregation and angle-based criteria for approximation.</li>
-          </ul>
-
-          <h3 class="subheading">Design Notes</h3>
-          <ul class="bullet-list">
-            <li>Focus on clear serial design first, with an eye toward future parallelization.</li>
-            <li>Low-level profiling to understand memory access patterns and hotspots.</li>
-          </ul>
-
-          <div class="project-links">
-            <a href="https://github.com/DavidRichardson02/Serial-Hashed-Octree-Barnes-Hut-N-Body-Simulator-0_3" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="subheading">Gallery</h3>
-          <div class="gallery-grid">
-            <figure>
-              <img src="images/octree_structure.png" alt="Octree structure visualization" />
-              <figcaption>3D octree structure used for hierarchical force approximation.</figcaption>
-            </figure>
-            <figure>
-              <img src="images/octree_orbits.png" alt="3D particle orbits" />
-              <figcaption>Simulated orbits and trajectories in a 3D field.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= CSV ANALYSIS ENGINE ========= -->
-  <section id="csv-analysis" class="section">
-    <div class="container">
-      <h2 class="section-title">Automated CSV Dataset Analysis &amp; Modeling</h2>
-
-      <div class="grid-2">
-        <div>
-          <p>
-            A modular C++17 analytics engine for structured scientific datasets, focusing on
-            schema inference, standardization, diagnostics, and modeling for CSV-based workflows.
-          </p>
-
-          <h3 class="subheading">Key Components</h3>
-          <ul class="bullet-list">
-            <li>Custom tokenization and parsing pipeline resilient to malformed rows and mixed types.</li>
-            <li>Columnar data representation to support efficient scanning, transforms, and statistics.</li>
-            <li>Hooks for visualization and model-fitting on top of the standardized data structures.</li>
-          </ul>
-
-          <h3 class="subheading">Use Cases</h3>
-          <ul class="bullet-list">
-            <li>Rapid exploration of experimental logs and simulation outputs.</li>
-            <li>Repeatable data-cleaning and feature extraction pipelines for later analysis.</li>
-          </ul>
-
-          <div class="project-links">
-            <a href="https://github.com/DavidRichardson02/Automated_CSV_Data_Analysis" target="_blank" rel="noopener">
-              <i class="fa-brands fa-github"></i> View on GitHub
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <h3 class="subheading">Gallery</h3>
-          <div class="gallery-grid">
-            <figure>
-              <img src="images/csv_schema.png" alt="Schema inference diagram" />
-              <figcaption>Diagram of the schema inference and validation pipeline.</figcaption>
-            </figure>
-            <figure>
-              <img src="images/csv_plots.png" alt="Plots from CSV analytics" />
-              <figcaption>Example visualizations generated from standardized datasets.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========= FOOTER ========= -->
   <footer class="site-footer">
-    <div class="container footer-content">
-      <span>&copy; <span id="year"></span> David Richardson</span>
-      <span>Engineering Case Studies • GitHub Pages</span>
+    <div class="container footer-grid">
+      <span>&copy; <span id="year">2026</span> David Richardson</span>
+      <span>Engineering case studies</span>
     </div>
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
   </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
